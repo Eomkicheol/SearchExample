@@ -8,9 +8,20 @@
 import Foundation
 import ModuleComponents
 
-public protocol DetailBuildable: Buildable {
-    func build(with parameter: Parameter) -> Controllable
+
+
+
+public protocol DetailParameterable: Parameter {
+    var viewModel: StoreDomainEntity { get }
 }
 
+public protocol DetailBuildable: Buildable {
+    func build(with parameter: DetailParameterable) -> Controllable
+}
 
 public protocol DetailListener: AnyObject {}
+
+
+public protocol DetailControllerable: UIViewControllable {
+    var listener: DetailListener? { get set }
+}

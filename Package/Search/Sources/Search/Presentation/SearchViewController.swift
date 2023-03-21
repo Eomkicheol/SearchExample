@@ -18,10 +18,6 @@ import Detail
 
 import DomainEntity
 
-public protocol SearchControllerable: UIViewControllable {
-    var listener: SearchListener? { get set }
-    var disposeBag: DisposeBag { get }
-}
 
 final class SearchViewController: UIViewController, SearchControllerable, ReactorKit.View {
     
@@ -156,7 +152,7 @@ extension SearchViewController {
             .compactMap { $0 }
             .asDriver(onErrorJustReturn: .init(item: .init()))
             .drive(with: self) { vc, items in
-                guard let router = vc.router?.routeToDetail(with: DetailParameter(viewModel: items)) as? DetailViewController else { return }
+                let router = vc.router?.routeToDetail(with: DetailParameter(viewModel: items))
                 vc.navigationController?.pushViewController(router, animated: true)
             }
             .disposed(by: self.disposeBag)

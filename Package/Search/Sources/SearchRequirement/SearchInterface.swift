@@ -14,3 +14,7 @@ public protocol SearchBuildable: Buildable {
 
 
 public protocol SearchListener: AnyObject {}
+
+public protocol SearchControllerable: UIViewControllable {
+    var listener: SearchListener? { get set }
+}

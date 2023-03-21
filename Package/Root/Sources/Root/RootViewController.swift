@@ -15,7 +15,7 @@ import Launch
 import SearchRequirement
 import Search
 
-public protocol RootControllerable: UIViewControllable {}
+import RootRequirement
 
 final class RootViewController: UINavigationController, RootControllerable {
     

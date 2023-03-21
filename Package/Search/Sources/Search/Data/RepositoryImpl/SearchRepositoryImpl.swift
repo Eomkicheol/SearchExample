@@ -11,5 +11,5 @@ import RxSwift
 import Entitys
 
 public protocol SearchRepositoryImpl {
-    func fetchSearchKeyword(with keyword: String, limit: Int) -> Single<StoreEntity>
+    func fetchSearchKeyword(with keyword: String, limit: Int) -> Observable<StoreEntity>
 }

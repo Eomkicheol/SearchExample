@@ -20,7 +20,8 @@ public struct SearchRepository: SearchRepositoryImpl  {
         self.network = network
     }
     
-    public func fetchSearchKeyword(with keyword: String, limit: Int) -> Single<StoreEntity> {
+    public func fetchSearchKeyword(with keyword: String, limit: Int) -> Observable<StoreEntity> {
         return self.network.request(SearchApi.search(keyword: keyword, limit: limit))
+            .asObservable()
     }
 }

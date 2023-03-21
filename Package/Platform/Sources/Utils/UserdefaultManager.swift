@@ -7,12 +7,12 @@
 
 import Foundation
 
-public protocol UserdefaultProtocol: AnyObject {
+public protocol UserdefaultImpl: AnyObject {
     func setString(_ key: String, value: [String])
     func getString(_ key: String) -> [String]
 }
 
-public class UserdefaultManager: UserdefaultProtocol {
+public class UserdefaultManager: UserdefaultImpl {
     
     public init() {}
     

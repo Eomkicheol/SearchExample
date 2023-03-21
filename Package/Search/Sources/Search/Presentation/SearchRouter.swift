@@ -13,7 +13,7 @@ import DetailRequirement
 import Detail
 
 protocol SearchRoutable: Routable {
-    func routeToDetail(with parameter: Parameter) -> Controllable?
+    func routeToDetail(with parameter: DetailParameter) -> Controllable
 }
 
 final class SearchRouter: SearchRoutable {
@@ -28,8 +28,7 @@ final class SearchRouter: SearchRoutable {
     }
     
     // MARK: - Public
-    func routeToDetail(with parameter: Parameter) -> Controllable? {
-        guard let parameter = parameter as? DetailParameter else { return nil }
+    func routeToDetail(with parameter: DetailParameter) -> Controllable {
         return builder.build(with: parameter)
     }
 }

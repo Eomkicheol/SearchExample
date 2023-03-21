@@ -19,11 +19,6 @@ import Common
 import DomainEntity
 
 
-public protocol DetailControllerable: UIViewControllable {
-    var listener: DetailListener? { get set }
-    var disposeBag: DisposeBag { get }
-}
-
 public class DetailViewController: UIViewController, DetailControllerable, ReactorKit.View {
     
     // MARK: - View

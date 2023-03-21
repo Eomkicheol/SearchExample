@@ -44,6 +44,7 @@ let package = Package(
                 name: "Apis",
                 dependencies: [
                     .product(name: "RxMoya", package: "Moya"),
+                    "Networking"
                 ]),
         
             .target(

@@ -10,7 +10,7 @@ import DetailRequirement
 import ModuleComponents
 import DomainEntity
 
-public class DetailDependency: Dependency {
+public class DetailDependency {
     
     weak var listener: DetailListener?
     
@@ -19,7 +19,7 @@ public class DetailDependency: Dependency {
     }
 }
 
-public struct DetailParameter: Parameter {
+public struct DetailParameter {
     
     let viewModel: StoreDomainEntity
     
@@ -34,11 +34,12 @@ public final class DetailBuilder: Builder<Dependency>, DetailBuildable {
     public func build(with parameter: Parameter) -> Controllable {
         let viewController = DetailViewController()
         
-        guard let dependency = dependency as? DetailDependency,
-                let parameter = parameter as? DetailParameter else { return viewController }
+        guard let dependency = dependency as? DetailDependency else { return viewController }
+        
+        
         
         let router: DetailRoutable = DetailRouter()
-        let reactor: DetailReactor = DetailReactor(item: parameter.viewModel)
+        let reactor: DetailReactor = DetailReactor(item: )
 
 
         viewController.router = router

@@ -16,14 +16,17 @@ public class SearchDependency: Dependency {
     
     weak var listener: SearchListener?
     let repositroy: SearchRepositoryImpl
-    let userDefault: UserdefaultProtocol
+    let userDefault: UserdefaultImpl
+    let dataMapper: StoreDataMapperImpl
     
     public init(listener: SearchListener?,
                 repositroy: SearchRepositoryImpl,
-                userDefault: UserdefaultProtocol) {
+                userDefault: UserdefaultImpl,
+                dataMapper: StoreDataMapperImpl) {
         self.listener = listener
         self.repositroy = repositroy
         self.userDefault = userDefault
+        self.dataMapper = dataMapper
     }
 }
 
@@ -39,7 +42,8 @@ public final class SearchBuilder: Builder<Dependency>, SearchBuildable {
         guard let dependency = dependency as? SearchDependency else { return viewController }
         
         let useCase: SearchUseCase = SearchUseCase(repository: dependency.repositroy,
-                                                           manager: dependency.userDefault)
+                                                   manager: dependency.userDefault,
+                                                   dataMapper: dependency.dataMapper)
         
         let detailBuilder: DetailBuildable = DetailBuilder(
             DetailDependency(listener: viewController)

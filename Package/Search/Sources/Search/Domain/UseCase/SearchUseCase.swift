@@ -14,20 +14,24 @@ import DomainEntity
 public class SearchUseCase {
     
     private let repository: SearchRepositoryImpl
-    private let manager: UserdefaultProtocol
+    private let manager: UserdefaultImpl
+    private let dataMapper: StoreDataMapperImpl
     
     public init(repository: SearchRepositoryImpl,
-                manager: UserdefaultProtocol) {
+                manager: UserdefaultImpl,
+                dataMapper: StoreDataMapperImpl) {
         self.repository = repository
         self.manager = manager
+        self.dataMapper = dataMapper
     }
     
     public func fetchSearchKeyword(with keyword: String, limit: Int) -> Observable<[StoreDomainEntity]> {
         return repository.fetchSearchKeyword(with: keyword, limit: limit)
-            .asObservable()
-            .map { $0.items.map {
-                StoreDomainEntity(item: $0)
-            } }
+            .map { [weak self] item -> [StoreDomainEntity] in
+                guard let self = self else { return [] }
+                let task = self.dataMapper.toDataModel(domainModel: item)
+                return task
+            }
     }
     
     public func fetchUserDefaultKeyword(with key: String) -> [String] {

@@ -38,11 +38,12 @@ public final class RootBuilder: Builder<Dependency>, RootBuildable {
         
         let network: NetworkType = Network()
         let repositroy: SearchRepositoryImpl = SearchRepository(network: network)
-        let userDefault: UserdefaultProtocol = UserdefaultManager()
+        let userDefault: UserdefaultImpl = UserdefaultManager()
+        let dataMapper: StoreDataMapperImpl = StoreDataMapper()
         
         let searchBuilder: SearchBuildable = SearchBuilder(SearchDependency(listener: viewController,
                                                                             repositroy: repositroy,
-                                                                            userDefault: userDefault))
+                                                                            userDefault: userDefault, dataMapper: dataMapper))
         
         let router: RootRoutable = RootRouter(launchBuilder: launchBuilder,
                                               searchBuilder: searchBuilder)
