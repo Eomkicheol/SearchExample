@@ -152,7 +152,9 @@ extension SearchViewController {
             .compactMap { $0 }
             .asDriver(onErrorJustReturn: .init(item: .init()))
             .drive(with: self) { vc, items in
-                let router = vc.router?.routeToDetail(with: DetailParameter(viewModel: items))
+                
+                guard let router = vc.router?.routeToDetail(with: DetailParameter.init(viewModel: items )) as? DetailControllerable else { return }
+//
                 vc.navigationController?.pushViewController(router, animated: true)
             }
             .disposed(by: self.disposeBag)

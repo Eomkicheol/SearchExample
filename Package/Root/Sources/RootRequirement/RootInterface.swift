@@ -9,6 +9,8 @@ import Foundation
 import ModuleComponents
 
 public protocol RootBuildable: AnyObject {
-    func build(with parameter: Parameter) -> Controllable
+    func build() -> Controllable
 }
 public protocol RootControllerable: UIViewControllable {}
+
+public protocol RootParameterable {}

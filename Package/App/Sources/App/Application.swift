@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 import ModuleComponents
-import Root
+import RootRequirement
 
 
 public protocol AppControllable: AnyObject, Controllable {
@@ -46,7 +46,7 @@ final class App: AppControllable {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        guard let  root = router.routeToRoot(with: AppParameter()) as? RootControllerable else {
+        guard let  root = router.routeToRoot() as? RootControllerable else {
             return
         }
 

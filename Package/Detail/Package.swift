@@ -38,6 +38,7 @@ let package = Package(
                 name: "DetailRequirement",
                 dependencies: [
                     .product(name: "ModuleComponents", package: "Platform"),
+                    .product(name: "DomainEntity", package: "Networking"),
                 ]),
         
             .testTarget(

@@ -9,12 +9,15 @@ import Foundation
 import ModuleComponents
 
 public protocol SearchBuildable: Buildable {
-    func build(with parameter: Parameter) -> Controllable
+    func build(with parameter: SearchParameterable) -> Controllable
 }
-
 
 public protocol SearchListener: AnyObject {}
 
 public protocol SearchControllerable: UIViewControllable {
     var listener: SearchListener? { get set }
 }
+
+public protocol SearchParameterable {}
+
+

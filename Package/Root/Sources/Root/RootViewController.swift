@@ -55,7 +55,7 @@ final class RootViewController: UINavigationController, RootControllerable {
     }
     
     func presentLaunch(animated: Bool, completion: ((LaunchControllable) -> Void)? = nil ) {
-        guard let launch = router?.routeToLaunch(with: RootParameter()) as? LaunchControllable else { return }
+        guard let launch = router?.routeToLaunch(with: LaunchParameter()) as? LaunchControllable else { return }
         
         launch.listener = self
         

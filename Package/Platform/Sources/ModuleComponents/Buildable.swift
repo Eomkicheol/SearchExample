@@ -9,11 +9,6 @@ import Foundation
 
 public protocol Dependency { }
 
-    /// Define the parameters the module will use at start.
-public protocol Parameter { }
-
-    /// Define build function.
-    /// e.g. func build(parameter: Parameter) -> Controllable
 public protocol Buildable { }
 
 open class Builder<Dependency>: Buildable {

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+public protocol Parameter {}
 /// Define input & output interface to communicate between parent and child.
 public protocol Controllable { }
 

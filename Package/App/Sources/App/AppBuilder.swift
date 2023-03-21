@@ -14,6 +14,7 @@ public struct AppDependency {
     // MARK: - Property
     
     
+    
     // MARK: - Initializer
     public init() {}
 }

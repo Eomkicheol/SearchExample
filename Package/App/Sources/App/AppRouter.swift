@@ -10,7 +10,7 @@ import ModuleComponents
 import RootRequirement
 
 protocol AppRoutable: Routable {
-    func routeToRoot(with parameter: Parameter) -> Controllable
+    func routeToRoot() -> Controllable
 }
 
 final class AppRouter: AppRoutable {
@@ -27,7 +27,7 @@ final class AppRouter: AppRoutable {
     }
     
     // MARK: - Route
-    func routeToRoot(with parameter: Parameter) -> Controllable {
-        rootBuilder.build(with: parameter)
+    func routeToRoot() -> Controllable {
+        rootBuilder.build()
     }
 }

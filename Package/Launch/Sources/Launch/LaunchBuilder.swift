@@ -17,17 +17,15 @@ public struct LaunchDependency: Dependency {
     }
 }
 
-public struct LaunchParameter: Parameter {
+public struct LaunchParameter: LaunchParameterable{
     public init() {}
 }
 
 
-public final class LaunchBuilder: Builder<Dependency> , LaunchBuildable {
-    public func build(with parameter: Parameter) -> Controllable {
+public final class LaunchBuilder: Builder<LaunchDependency> , LaunchBuildable {
+    public func build(with parameter: LaunchParameterable) -> Controllable {
         
         let viewController: LaunchViewController = LaunchViewController()
-        
-        guard let dependency = dependency as? LaunchDependency else { return viewController }
         
         let router: LaunchRoutable = LaunchRouter()
         

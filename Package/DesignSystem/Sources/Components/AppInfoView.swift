@@ -24,8 +24,6 @@ public class AppInfoView: UIView {
     var thumbnailImageView = RoundedImageView(frame: .zero).then {
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
-        $0.radiusRatio = 15
-        $0.borderColor = .systemGray6
     }
     
     var statckView = UIStackView().then {
@@ -65,6 +63,12 @@ public class AppInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        thumbnailImageView.radiusRatio = 15
+        thumbnailImageView.borderColor = .systemGray6
+    }
+    
     public func setup(with item: StoreDomainEntity) {
         appNameLabel.text = item.trackName
         appDescriptionLabel.text = item.appDescription
@@ -87,7 +91,7 @@ public class AppInfoView: UIView {
         
         thumbnailImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
-            $0.width.equalTo(110)
+            $0.width.equalTo(90)
             $0.leading.equalToSuperview().offset(20)
             $0.bottom.equalToSuperview().offset(-5)
         }

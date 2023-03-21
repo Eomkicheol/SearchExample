@@ -11,10 +11,6 @@ import UIKit
 import ModuleComponents
 import LaunchRequirement
 
-public protocol LaunchControllable: UIViewControllable, UINavigationControllerDelegate {
-    var listener: LaunchListener? { get set }
-}
-
 final class LaunchViewController: UIViewController, LaunchControllable {
   
     // MARK: - View

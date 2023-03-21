@@ -12,9 +12,8 @@ import RootRequirement
 
 import LaunchRequirement
 import Launch
-
-import Search
 import SearchRequirement
+import Search
 
 import Utils
 import Networking
@@ -25,11 +24,11 @@ public class RootDependency: Dependency {
     public init() {}
 }
 
-public struct RootParameter: Parameter {}
+public struct RootParameter: RootParameterable {}
 
 
-public final class RootBuilder: Builder<Dependency>, RootBuildable {
-    public func build(with parameter: Parameter) -> Controllable {
+public final class RootBuilder: Builder<RootDependency>, RootBuildable {
+    public func build() -> Controllable {
         let viewController = RootViewController()
         
         let launchBuilder: LaunchBuildable = LaunchBuilder(
@@ -53,5 +52,6 @@ public final class RootBuilder: Builder<Dependency>, RootBuildable {
         
         return viewController
     }
+    
 }
 

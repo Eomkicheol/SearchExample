@@ -30,16 +30,14 @@ public class SearchDependency: Dependency {
     }
 }
 
-public struct SearchParameter: Parameter {
+public struct SearchParameter: SearchParameterable {
     public init() {}
 }
 
 
-public final class SearchBuilder: Builder<Dependency>, SearchBuildable {
-    public func build(with parameter: Parameter) -> Controllable {
+public final class SearchBuilder: Builder<SearchDependency>, SearchBuildable {
+    public func build(with parameter: SearchParameterable) -> ModuleComponents.Controllable {
         let viewController = SearchViewController()
-        
-        guard let dependency = dependency as? SearchDependency else { return viewController }
         
         let useCase: SearchUseCase = SearchUseCase(repository: dependency.repositroy,
                                                    manager: dependency.userDefault,
@@ -51,11 +49,9 @@ public final class SearchBuilder: Builder<Dependency>, SearchBuildable {
         
         let router: SearchRoutable = SearchRouter(builder: detailBuilder)
         let reactor: SearchReactor = SearchReactor(useCase: useCase)
-
-
+        
         viewController.router = router
         viewController.reactor = reactor
-
         return viewController
     }
 }

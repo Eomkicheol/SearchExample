@@ -37,7 +37,6 @@ let package = Package(
                 .product(name: "ImageLoader", package: "Platform"),
                 .product(name: "DomainEntity", package: "Networking"),
                 .product(name: "Apis", package: "Networking"),
-                .product(name: "DomainEntity", package: "Networking"),
                 
             ]),
         

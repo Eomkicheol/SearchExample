@@ -7,11 +7,10 @@
 
 import Foundation
 import ModuleComponents
+import DomainEntity
 
 
-
-
-public protocol DetailParameterable: Parameter {
+public protocol DetailParameterable {
     var viewModel: StoreDomainEntity { get }
 }
 

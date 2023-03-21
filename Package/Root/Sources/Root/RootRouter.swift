@@ -15,8 +15,8 @@ import SearchRequirement
 
 
 protocol RootRoutable: Routable {
-    func routeToLaunch(with parameter: Parameter) -> Controllable
-    func routeToSearch(with parameter: Parameter) -> Controllable
+    func routeToLaunch(with parameter: LaunchParameterable) -> Controllable
+    func routeToSearch(with parameter: SearchParameterable) -> Controllable
 }
 
 final class RootRouter: RootRoutable {
@@ -34,11 +34,11 @@ final class RootRouter: RootRoutable {
     }
     
     // MARK: - Public
-    func routeToLaunch(with parameter: Parameter) -> Controllable {
+    func routeToLaunch(with parameter: LaunchParameterable) -> Controllable {
         launchBuilder.build(with: parameter)
     }
     
-    func routeToSearch(with parameter: Parameter) -> Controllable {
+    func routeToSearch(with parameter: SearchParameterable) -> Controllable {
         searchBuilder.build(with: parameter)
     }
 }

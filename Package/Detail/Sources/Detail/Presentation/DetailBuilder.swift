@@ -19,27 +19,23 @@ public class DetailDependency {
     }
 }
 
-public struct DetailParameter {
-    
-    let viewModel: StoreDomainEntity
+public struct DetailParameter: DetailParameterable  {
+    public var viewModel: StoreDomainEntity
     
     public init(viewModel: StoreDomainEntity) {
         self.viewModel = viewModel
     }
-    
 }
 
 
-public final class DetailBuilder: Builder<Dependency>, DetailBuildable {
-    public func build(with parameter: Parameter) -> Controllable {
+
+public final class DetailBuilder: Builder<DetailDependency>, DetailBuildable {
+    public func build(with parameter: DetailParameterable) -> Controllable {
         let viewController = DetailViewController()
         
-        guard let dependency = dependency as? DetailDependency else { return viewController }
-        
-        
-        
+    
         let router: DetailRoutable = DetailRouter()
-        let reactor: DetailReactor = DetailReactor(item: )
+        let reactor: DetailReactor = DetailReactor(item: parameter.viewModel)
 
 
         viewController.router = router
