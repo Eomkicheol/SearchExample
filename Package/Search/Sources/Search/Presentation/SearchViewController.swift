@@ -71,12 +71,10 @@ final class SearchViewController: UIViewController, SearchControllerable, Reacto
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
         
-        // Enable large titles
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.standardAppearance = appearance
         
-        // Set the title of the view controller
         navigationItem.title = "검색"
     }
     
@@ -87,7 +85,6 @@ final class SearchViewController: UIViewController, SearchControllerable, Reacto
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "검색어 입력"
         
-        // Change the placeholder text color
         let textField = searchController.searchBar.searchTextField
         textField.textColor = .black
         

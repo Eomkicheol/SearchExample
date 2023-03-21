@@ -105,8 +105,6 @@ public class ListView: UIView, UIScrollViewDelegate {
         self.bindDataSource()
         self.bindDelegate()
     }
-    
-    
 }
 
 // MARK: Func

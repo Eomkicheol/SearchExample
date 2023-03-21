@@ -88,8 +88,8 @@ extension DetailViewController {
     }
     
     private func bindNavigationItems(reactor: Reactor) {
-        reactor.pulse(\.$navigationTitle)
-            .compactMap { $0 }
+        reactor.state.map { $0.navigationTitle }
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: "")
             .drive(with: self) { vc, thumbnail in
                 let titleView = NavigationTitleView(frame: .zero, thumbnail: thumbnail)
@@ -123,8 +123,8 @@ extension DetailViewController {
     
     private func bindAppInfoView(reactor: Reactor) {
         
-        reactor.pulse(\.$appInfo)
-            .compactMap { $0 }
+        reactor.state.map { $0.appInfo }
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: .init(item: .init()))
             .drive(with: self, onNext: { vc, item in
                 let infoView = AppInfoView()
@@ -137,8 +137,8 @@ extension DetailViewController {
     }
     
     private func bindAppShortVarietyInfoView(reactor: Reactor) {
-        reactor.pulse(\.$appShortVarietyInfo)
-            .compactMap { $0 }
+        reactor.state.map { $0.appShortVarietyInfo}
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: .init(item: .init()))
             .drive(with: self) { vc, item in
                 let infoView = AppShortVarietyInfoView(frame: .zero)
@@ -151,8 +151,8 @@ extension DetailViewController {
     }
     
     private func bindScreenshotsView(reactor: Reactor) {
-        reactor.pulse(\.$screenshotsInfo)
-            .compactMap { $0 }
+        reactor.state.map { $0.screenshotsInfo }
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: [])
             .drive(with: self) { vc, item in
                 let titleView = CategoryView()
@@ -168,8 +168,8 @@ extension DetailViewController {
     
     private func bindNewFeaturesView(reactor: Reactor) {
         
-        reactor.pulse(\.$newFeaturesInfo)
-            .compactMap { $0 }
+        reactor.state.map { $0.newFeaturesInfo }
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: .init(item: .init()))
             .drive(with: self) { vc, item in
                 let titleView = CategoryView()
@@ -186,8 +186,8 @@ extension DetailViewController {
     
     private func bindDescriptionView(reactor: Reactor) {
         
-        reactor.pulse(\.$descriptionInfo)
-            .compactMap { $0 }
+        reactor.state.map { $0.descriptionInfo}
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: .init(item: .init()))
             .drive(with: self) { vc, item in
                 let contentView = ContentExpandableView()
@@ -201,8 +201,8 @@ extension DetailViewController {
     }
     
     private func bindDetailInfosView(reactor: Reactor) {
-        reactor.pulse(\.$detailInfo)
-            .compactMap { $0 }
+        reactor.state.map { $0.detailInfo }
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: [])
             .drive(with: self) { vc, item in
                 let titleView = CategoryView()
@@ -250,8 +250,8 @@ extension DetailViewController: ListViewDelegate {
 
 extension DetailViewController: AppInfoViewDelegate {
     public func didTapSharedButton() {
-        let trackName = self.reactor?.currentState.itesm?.trackName ?? ""
-        let items: [Any] = [trackName]
+        guard let trackName = self.reactor?.currentState.itesm.trackName else { return }
+        let items = [trackName]
         let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(activity, animated: true, completion: nil)
     }
