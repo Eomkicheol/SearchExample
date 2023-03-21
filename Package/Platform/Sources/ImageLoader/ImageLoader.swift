@@ -16,10 +16,8 @@ public class CancellableWrapper: Cancellable {
     private(set) var isCancelled: Bool = false
     
     public func cancel() {
-        guard let cancellable = self.cancellable else { return }
-        
         isCancelled = true
-        cancellable.cancel()
+        cancellable?.cancel()
     }
 }
 
@@ -36,24 +34,12 @@ public class ImageLoader {
     func load(url: URL, completion: @escaping (UIImage?) -> Void) -> Cancellable {
         let key = NSString(string: url.absoluteString)
         
-        if let cachedImage = getCachedImage(forKey: key, completion: completion) {
-            return cachedImage
+        if let cachedImage = cache.object(forKey: key) {
+            completion(cachedImage)
+            return CancellableWrapper()
         }
         
-        return fetchData(from: url, forKey: key, completion: completion)
-    }
-    
-    private func getCachedImage(forKey key: NSString, completion: @escaping (UIImage?) -> Void) -> Cancellable? {
-        if let image = cache.object(forKey: key) {
-            completion(image)
-            return nil
-        }
-        return nil
-    }
-    
-    private func fetchData(from url: URL, forKey key: NSString, completion: @escaping (UIImage?) -> Void) -> Cancellable {
-        let cancellable = CancellableWrapper()
-        let dataTask = URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
+        let dataTask = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let data = data, let image = UIImage(data: data) else {
                 DispatchQueue.main.async {
                     completion(nil)
@@ -61,14 +47,16 @@ public class ImageLoader {
                 return
             }
             
+            self?.cache.setObject(image, forKey: key)
+            
             DispatchQueue.main.async {
-                self?.cache.setObject(image, forKey: key)
-                completion(!cancellable.isCancelled ? image : nil)
+                completion(image)
             }
         }
         
         dataTask.resume()
         
+        let cancellable = CancellableWrapper()
         cancellable.cancellable = dataTask
         return cancellable
     }
@@ -78,25 +66,25 @@ private var imageDownloadDataTaskKey: Void?
 
 public extension UIImageView {
     var dataTask: Cancellable? {
-           get {
-               objc_getAssociatedObject(self, &imageDownloadDataTaskKey) as? Cancellable
-           }
-           set {
-               dataTask?.cancel()
-               objc_setAssociatedObject(self, &imageDownloadDataTaskKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-           }
-       }
-       
-       func setImage(urlString: String) {
-           guard let url = URL(string: urlString) else { return }
-           loadImage(from: url)
-       }
-       
-       private func loadImage(from url: URL) {
-           dataTask = ImageLoader.shared.load(url: url) { [weak self] image in
-               DispatchQueue.main.async {
-                   self?.image = image
-               }
-           }
-       }
+        get {
+            objc_getAssociatedObject(self, &imageDownloadDataTaskKey) as? Cancellable
+        }
+        set {
+            dataTask?.cancel()
+            objc_setAssociatedObject(self, &imageDownloadDataTaskKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    func setImage(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        loadImage(from: url)
+    }
+    
+    private func loadImage(from url: URL) {
+        dataTask = ImageLoader.shared.load(url: url) { [weak self] image in
+            DispatchQueue.main.async {
+                self?.image = image
+            }
+        }
+    }
 }
