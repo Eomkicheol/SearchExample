@@ -18,6 +18,7 @@ let package = Package(
         .package(path: "../Platform"),
         .package(path: "../Launch"),
         .package(path: "../Search"),
+        .package(path: "../Detail"),
         .package(path: "../Networking")
     ],
     targets: [
@@ -34,11 +35,8 @@ let package = Package(
                     "RootRequirement",
                     .product(name: "ModuleComponents", package: "Platform"),
                     .product(name: "LaunchRequirement", package: "Launch"),
-                    .product(name: "Launch", package: "Launch"),
                     .product(name: "SearchRequirement", package: "Search"),
-                    .product(name: "Search", package: "Search"),
-                    .product(name: "Networking", package: "Networking"),
-                    .product(name: "Utils", package: "Platform"),
+                    .product(name: "DetailRequirement", package: "Detail"),
                 ]),
     ]
 )

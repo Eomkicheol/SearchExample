@@ -11,17 +11,39 @@ import Networking
 import RxSwift
 import Entitys
 import Apis
+import DomainEntity
 
 
 public struct SearchRepository: SearchRepositoryImpl  {
-    private let network: NetworkType
     
-    public init(network: NetworkType) {
+    private let network: NetworkType
+    private let dataMapper: StoreDataMapper
+    private let userDefault: UserdefaultImpl
+    
+    public init(network: NetworkType,
+                dataMapper: StoreDataMapper,
+                userDefault: UserdefaultImpl) {
         self.network = network
+        self.dataMapper = dataMapper
+        self.userDefault = userDefault
     }
     
-    public func fetchSearchKeyword(with keyword: String, limit: Int) -> Observable<StoreEntity> {
+    public func fetchSearchKeyword(with keyword: String, limit: Int) -> Observable<[StoreDomainEntity]> {
         return self.network.request(SearchApi.search(keyword: keyword, limit: limit))
             .asObservable()
+            .flatMap {  item -> Observable<[StoreDomainEntity]> in
+                return Observable.just(self.dataMapper.toDataModel(domainModel: item)) }
+    }
+    
+    public func toDataModel(domainModel: StoreEntity) -> [StoreDomainEntity] {
+        return self.dataMapper.toDataModel(domainModel: domainModel)
+    }
+    
+    public func fetchUserDefaultKeyword(with key: String) -> [String] {
+        return self.userDefault.getString(key)
+    }
+    
+    public func setUserDefaultKeyword(with key: String, value: [String]) {
+        self.userDefault.setString(key, value: value)
     }
 }

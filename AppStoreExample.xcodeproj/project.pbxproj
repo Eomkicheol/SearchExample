@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F29ED5F29C5A8D600329544 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 5F29ED5E29C5A8D600329544 /* App */; };
+		5F32102129C9994F00CD0885 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 5F32102029C9994F00CD0885 /* App */; };
 		5F49E93829C59857009B12FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F49E93729C59857009B12FA /* AppDelegate.swift */; };
 		5F49E93A29C59857009B12FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F49E93929C59857009B12FA /* SceneDelegate.swift */; };
 		5F49E94129C59858009B12FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F49E94029C59858009B12FA /* Assets.xcassets */; };
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F29ED5F29C5A8D600329544 /* App in Frameworks */,
+				5F32102129C9994F00CD0885 /* App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +130,7 @@
 			);
 			name = AppStoreExample;
 			packageProductDependencies = (
-				5F29ED5E29C5A8D600329544 /* App */,
+				5F32102029C9994F00CD0885 /* App */,
 			);
 			productName = AppStoreExample;
 			productReference = 5F49E93429C59857009B12FA /* AppStoreExample.app */;
@@ -401,7 +401,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5F29ED5E29C5A8D600329544 /* App */ = {
+		5F32102029C9994F00CD0885 /* App */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = App;
 		};

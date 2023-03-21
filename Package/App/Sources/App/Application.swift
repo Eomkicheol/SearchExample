@@ -11,15 +11,13 @@ import UIKit
 import ModuleComponents
 import RootRequirement
 
+import AppRequirement
 
-public protocol AppControllable: AnyObject, Controllable {
-    var window: UIWindow? { get }
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions)
-}
+
 
 final class App: AppControllable {
+    var uiviewController: UIViewController
+    
     // MARK: - Property
     var window: UIWindow?
     var router: AppRoutable
@@ -27,6 +25,7 @@ final class App: AppControllable {
     // MARK: - Initializer
     init(router: AppRoutable) {
         self.router = router
+        self.uiviewController = UIViewController()
     }
     
     // MARK: - Lifecycle
@@ -49,10 +48,11 @@ final class App: AppControllable {
         guard let  root = router.routeToRoot() as? RootControllerable else {
             return
         }
-
+        
+        
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController =  root
+        window.rootViewController =  root.uiviewController
         window.makeKeyAndVisible()
         
         self.window = window

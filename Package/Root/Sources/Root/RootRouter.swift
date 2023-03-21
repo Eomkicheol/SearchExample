@@ -10,13 +10,12 @@ import UIKit
 
 import ModuleComponents
 import LaunchRequirement
-
 import SearchRequirement
 
 
 protocol RootRoutable: Routable {
-    func routeToLaunch(with parameter: LaunchParameterable) -> Controllable
-    func routeToSearch(with parameter: SearchParameterable) -> Controllable
+    func routeToLaunch(with parameter: LaunchParameter) -> Controllable
+    func routeToSearch(with parameter: SearchParameter) -> Controllable
 }
 
 final class RootRouter: RootRoutable {
@@ -34,11 +33,11 @@ final class RootRouter: RootRoutable {
     }
     
     // MARK: - Public
-    func routeToLaunch(with parameter: LaunchParameterable) -> Controllable {
+    func routeToLaunch(with parameter: LaunchParameter) -> Controllable {
         launchBuilder.build(with: parameter)
     }
     
-    func routeToSearch(with parameter: SearchParameterable) -> Controllable {
+    func routeToSearch(with parameter: SearchParameter) -> Controllable {
         searchBuilder.build(with: parameter)
     }
 }

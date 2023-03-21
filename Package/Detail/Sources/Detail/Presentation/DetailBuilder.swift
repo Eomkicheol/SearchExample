@@ -12,35 +12,20 @@ import DomainEntity
 
 public class DetailDependency {
     
-    weak var listener: DetailListener?
-    
-    public init(listener: DetailListener?) {
-        self.listener = listener
-    }
+    public init() {}
 }
-
-public struct DetailParameter: DetailParameterable  {
-    public var viewModel: StoreDomainEntity
-    
-    public init(viewModel: StoreDomainEntity) {
-        self.viewModel = viewModel
-    }
-}
-
 
 
 public final class DetailBuilder: Builder<DetailDependency>, DetailBuildable {
-    public func build(with parameter: DetailParameterable) -> Controllable {
+    public func build(with parameter: DetailParameter) -> Controllable {
         let viewController = DetailViewController()
         
     
         let router: DetailRoutable = DetailRouter()
         let reactor: DetailReactor = DetailReactor(item: parameter.viewModel)
 
-
         viewController.router = router
         viewController.reactor = reactor
-        viewController.listener = dependency.listener
 
         return viewController
     }

@@ -10,7 +10,7 @@ import UIKit
 
 import ModuleComponents
 import DetailRequirement
-import Detail
+
 
 protocol SearchRoutable: Routable {
     func routeToDetail(with parameter: DetailParameter) -> Controllable

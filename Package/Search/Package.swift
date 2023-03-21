@@ -33,7 +33,6 @@ let package = Package(
                 .product(name: "Utils", package: "Platform"),
                 .product(name: "Components", package: "DesignSystem"),
                 .product(name: "DetailRequirement", package: "Detail"),
-                .product(name: "Detail", package: "Detail"),
                 .product(name: "ImageLoader", package: "Platform"),
                 .product(name: "DomainEntity", package: "Networking"),
                 .product(name: "Apis", package: "Networking"),

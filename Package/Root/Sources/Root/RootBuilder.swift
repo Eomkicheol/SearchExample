@@ -9,19 +9,23 @@ import Foundation
 
 import ModuleComponents
 import RootRequirement
-
 import LaunchRequirement
-import Launch
 import SearchRequirement
-import Search
-
-import Utils
-import Networking
+import DetailRequirement
 
 
 public class RootDependency: Dependency {
     
-    public init() {}
+    let launchBuilder: LaunchBuildable
+    let searchBuilder: SearchBuildable
+    let detailBuilder: DetailBuildable
+
+    public init(launchBuilder: LaunchBuildable, searchBuilder: SearchBuildable,
+                detailBuilder: DetailBuildable) {
+        self.launchBuilder = launchBuilder
+        self.searchBuilder = searchBuilder
+        self.detailBuilder = detailBuilder
+    }
 }
 
 public struct RootParameter: RootParameterable {}
@@ -31,21 +35,8 @@ public final class RootBuilder: Builder<RootDependency>, RootBuildable {
     public func build() -> Controllable {
         let viewController = RootViewController()
         
-        let launchBuilder: LaunchBuildable = LaunchBuilder(
-            LaunchDependency(listener: viewController)
-        )
-        
-        let network: NetworkType = Network()
-        let repositroy: SearchRepositoryImpl = SearchRepository(network: network)
-        let userDefault: UserdefaultImpl = UserdefaultManager()
-        let dataMapper: StoreDataMapperImpl = StoreDataMapper()
-        
-        let searchBuilder: SearchBuildable = SearchBuilder(SearchDependency(listener: viewController,
-                                                                            repositroy: repositroy,
-                                                                            userDefault: userDefault, dataMapper: dataMapper))
-        
-        let router: RootRoutable = RootRouter(launchBuilder: launchBuilder,
-                                              searchBuilder: searchBuilder)
+        let router: RootRoutable = RootRouter(launchBuilder: dependency.launchBuilder,
+                                              searchBuilder: dependency.searchBuilder)
         
         viewController.router = router
         
@@ -54,4 +45,3 @@ public final class RootBuilder: Builder<RootDependency>, RootBuildable {
     }
     
 }
-

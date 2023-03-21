@@ -10,9 +10,17 @@ let package = Package(
         .library(
             name: "App",
             targets: ["App"]),
+        
+            .library(
+                name: "AppRequirement",
+                targets: ["AppRequirement"]),
     ],
     dependencies: [
         .package(path: "../Platform"),
+        .package(path: "../Detail"),
+        .package(path: "../Search"),
+        .package(path: "../Networking"),
+        .package(path: "../Launch"),
         .package(path: "../Root"),
     ],
     targets: [
@@ -20,9 +28,26 @@ let package = Package(
         .target(
             name: "App",
             dependencies: [
+                "AppRequirement",
                 .product(name: "ModuleComponents", package: "Platform"),
-                .product(name: "RootRequirement", package: "Root"),
-                .product(name: "Root", package: "Root")
+                                .product(name: "RootRequirement", package: "Root"),
+                                .product(name: "Root", package: "Root"),
+                                .product(name: "DetailRequirement", package: "Detail"),
+                                .product(name: "Detail", package: "Detail"),
+                                .product(name: "SearchRequirement", package: "Search"),
+                                .product(name: "Search", package: "Search"),
+                                .product(name: "LaunchRequirement", package: "Launch"),
+                                .product(name: "Launch", package: "Launch")
             ]),
+        
+            .target(
+                name: "AppRequirement",
+                dependencies: [
+                    .product(name: "ModuleComponents", package: "Platform"),
+                                        .product(name: "RootRequirement", package: "Root"),
+                                        .product(name: "DetailRequirement", package: "Detail"),
+                                        .product(name: "SearchRequirement", package: "Search"),
+                                        .product(name: "LaunchRequirement", package: "Launch")
+                ]),
     ]
 )

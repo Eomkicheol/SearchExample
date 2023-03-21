@@ -14,7 +14,7 @@ import SearchRequirement
 import ReactorKit
 
 import DetailRequirement
-import Detail
+
 
 import DomainEntity
 
@@ -152,10 +152,9 @@ extension SearchViewController {
             .compactMap { $0 }
             .asDriver(onErrorJustReturn: .init(item: .init()))
             .drive(with: self) { vc, items in
-                
                 guard let router = vc.router?.routeToDetail(with: DetailParameter.init(viewModel: items )) as? DetailControllerable else { return }
-//
-                vc.navigationController?.pushViewController(router, animated: true)
+                router.listener = self
+                vc.navigationController?.pushViewController(router.uiviewController, animated: true)
             }
             .disposed(by: self.disposeBag)
     }

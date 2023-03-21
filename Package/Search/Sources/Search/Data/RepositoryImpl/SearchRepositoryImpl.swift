@@ -8,8 +8,10 @@
 import Foundation
 
 import RxSwift
-import Entitys
+import DomainEntity
 
 public protocol SearchRepositoryImpl {
-    func fetchSearchKeyword(with keyword: String, limit: Int) -> Observable<StoreEntity>
+    func fetchSearchKeyword(with keyword: String, limit: Int) -> Observable<[StoreDomainEntity]>
+    func fetchUserDefaultKeyword(with key: String) -> [String]
+    func setUserDefaultKeyword(with key: String, value: [String])
 }

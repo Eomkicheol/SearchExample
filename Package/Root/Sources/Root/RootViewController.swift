@@ -10,11 +10,7 @@ import UIKit
 
 import ModuleComponents
 import LaunchRequirement
-import Launch
-
 import SearchRequirement
-import Search
-
 import RootRequirement
 
 final class RootViewController: UINavigationController, RootControllerable {
@@ -59,20 +55,18 @@ final class RootViewController: UINavigationController, RootControllerable {
         
         launch.listener = self
         
-        setViewControllers([launch], animated: animated)
+        setViewControllers([launch.uiviewController], animated: animated)
         completion?(launch)
     }
     
     func presentSearch(animated: Bool, completion: ((SearchControllerable) -> Void)? = nil ) {
         
-        guard let tabBar = router?.routeToSearch(with: SearchParameter()) as? SearchControllerable else { return }
+        guard let searchView = router?.routeToSearch(with: SearchParameter()) as? SearchControllerable else { return }
+        searchView.listener = self
+        self.setViewControllers([searchView.uiviewController], animated: animated)
+        completion?(searchView)
         
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
-            guard let self = self else { return }
-//            self.navigationBar.isHidden = true
-            self.setViewControllers([tabBar], animated: animated)
-            completion?(tabBar)
-        }
+        
     }
 
 }

@@ -11,6 +11,6 @@ import ModuleComponents
 public protocol RootBuildable: AnyObject {
     func build() -> Controllable
 }
-public protocol RootControllerable: UIViewControllable {}
+public protocol RootControllerable: Controllable {}
 
 public protocol RootParameterable {}

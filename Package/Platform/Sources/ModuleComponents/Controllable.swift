@@ -5,11 +5,18 @@
 //  Created by 엄기철 on 2023/03/18.
 //
 
+
 import Foundation
 import UIKit
 
-public protocol Parameter {}
 /// Define input & output interface to communicate between parent and child.
-public protocol Controllable { }
+public protocol Controllable: AnyObject {
+    var uiviewController: UIViewController { get }
+}
 
-public protocol UIViewControllable: Controllable where Self: UIViewController { }
+public extension Controllable where Self: UIViewController {
+    var uiviewController: UIViewController {
+        return self
+    }
+}
+

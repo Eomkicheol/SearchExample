@@ -7,11 +7,8 @@
 
 
 import ModuleComponents
+import AppRequirement
 import RootRequirement
-
-protocol AppRoutable: Routable {
-    func routeToRoot() -> Controllable
-}
 
 final class AppRouter: AppRoutable {
     // MARK: - Property

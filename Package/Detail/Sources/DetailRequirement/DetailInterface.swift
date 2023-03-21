@@ -10,17 +10,21 @@ import ModuleComponents
 import DomainEntity
 
 
-public protocol DetailParameterable {
-    var viewModel: StoreDomainEntity { get }
+public struct DetailParameter {
+    public let viewModel: StoreDomainEntity
+    
+   public init(viewModel: StoreDomainEntity) {
+        self.viewModel = viewModel
+    }
 }
 
 public protocol DetailBuildable: Buildable {
-    func build(with parameter: DetailParameterable) -> Controllable
+    func build(with parameter: DetailParameter) -> Controllable
 }
 
 public protocol DetailListener: AnyObject {}
 
 
-public protocol DetailControllerable: UIViewControllable {
+public protocol DetailControllerable: Controllable {
     var listener: DetailListener? { get set }
 }

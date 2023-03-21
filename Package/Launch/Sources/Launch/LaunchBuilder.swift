@@ -11,19 +11,15 @@ import ModuleComponents
 import LaunchRequirement
 
 public struct LaunchDependency: Dependency {
-    weak var listener: LaunchListener?
-    public init(listener: LaunchListener?) {
-        self.listener = listener
-    }
-}
-
-public struct LaunchParameter: LaunchParameterable{
+    
     public init() {}
 }
 
 
+
+
 public final class LaunchBuilder: Builder<LaunchDependency> , LaunchBuildable {
-    public func build(with parameter: LaunchParameterable) -> Controllable {
+    public func build(with parameter: LaunchParameter) -> Controllable {
         
         let viewController: LaunchViewController = LaunchViewController()
         
@@ -31,7 +27,6 @@ public final class LaunchBuilder: Builder<LaunchDependency> , LaunchBuildable {
         
         //DI
         viewController.router = router
-        viewController.listener = dependency.listener
         
         return viewController
     }

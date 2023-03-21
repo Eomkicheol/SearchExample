@@ -6,36 +6,14 @@
 //
 
 import ModuleComponents
-import RootRequirement
-import Root
+import AppRequirement
 
-public struct AppDependency {
-    
-    // MARK: - Property
-    
-    
-    
-    // MARK: - Initializer
-    public init() {}
-}
-
-public struct AppParameter: Parameter {
-    // MARK: - Property
-    
-    // MARK: - Initializer
-    public init() { }
-}
-
-public protocol AppBuildable: Buildable {
-    func build(with parameter: Parameter) -> Controllable
-}
 
 public final class AppBuilder: Builder<AppDependency>, AppBuildable {
-    public func build(with parameter: Parameter) -> Controllable {
+    public func build(with parameter: AppParameter) -> Controllable {
         
-        let rootBuilder: RootBuildable = RootBuilder(RootDependency())
         
-        let router: AppRoutable = AppRouter(rootBuilder: rootBuilder)
+        let router: AppRoutable = AppRouter(rootBuilder: dependency.rootBuilder)
         
     
         let app: App = App(router: router)

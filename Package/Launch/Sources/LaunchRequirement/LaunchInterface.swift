@@ -13,16 +13,19 @@ public enum LaunchState {
     case completed
 }
 
-public protocol LaunchBuildable: Buildable {
-    func build(with parameter: LaunchParameterable) -> Controllable
+public struct LaunchParameter {
+    public init() {}
 }
 
-public protocol LaunchParameterable {}
+public protocol LaunchBuildable: Buildable {
+    func build(with parameter: LaunchParameter) -> Controllable
+}
+
 
 public protocol LaunchListener: AnyObject {
     func launch(_ launchController: Controllable, didComplete state: LaunchState)
 }
 
-public protocol LaunchControllable: UIViewControllable, UINavigationControllerDelegate {
+public protocol LaunchControllable: Controllable, UINavigationControllerDelegate {
     var listener: LaunchListener? { get set }
 }

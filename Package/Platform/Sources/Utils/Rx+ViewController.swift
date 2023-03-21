@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 public extension Reactive where Base: UICollectionViewFlowLayout {
-   public var footerSize: Binder<CGSize> {
+   var footerSize: Binder<CGSize> {
     return Binder(self.base) { view, size in
       view.footerReferenceSize = size
     }

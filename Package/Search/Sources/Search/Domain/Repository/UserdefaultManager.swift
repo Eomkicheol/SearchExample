@@ -1,16 +1,11 @@
 //
-//  UserdefaultManager.swift
+//  File.swift
 //  
 //
-//  Created by 엄기철 on 2023/03/18.
+//  Created by 엄기철 on 2023/03/21.
 //
 
 import Foundation
-
-public protocol UserdefaultImpl: AnyObject {
-    func setString(_ key: String, value: [String])
-    func getString(_ key: String) -> [String]
-}
 
 public class UserdefaultManager: UserdefaultImpl {
     
@@ -25,5 +20,3 @@ public class UserdefaultManager: UserdefaultImpl {
         return value
     }
 }
-
-
