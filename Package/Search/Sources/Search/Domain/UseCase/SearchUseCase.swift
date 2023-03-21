@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SearchUseCase.swift
 //  
 //
 //  Created by 엄기철 on 2023/03/19.
@@ -10,12 +10,11 @@ import RxSwift
 import Utils
 import DomainEntity
 
-
 public class SearchUseCase {
     
-    private let repository: SearchRepositoryImpl
+    private let repository: SearchRepositoryProtocol
     
-    public init(repository: SearchRepositoryImpl) {
+    public init(repository: SearchRepositoryProtocol) {
         self.repository = repository
     }
     

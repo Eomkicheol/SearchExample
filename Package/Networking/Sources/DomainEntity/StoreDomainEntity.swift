@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  StoreDomainEntity.swift
 //  
 //
 //  Created by 엄기철 on 2023/03/20.
@@ -44,14 +44,13 @@ public struct StoreDomainEntity: Hashable {
         self.sellerName = item.sellerName ?? ""
         self.languageTypes =  item.languageCodesISO2A.map { Language(code: $0) }
         self.averageUserRating = Float(((item.averageUserRatingForCurrentVersion ?? .zero) * 10) / 10)
-        self.shortVerietyInfo = self.makeShortInfoItmes(item: item)
-        self.infoItems = self.makeDetailInfoItmes(item: item)
+        self.shortVerietyInfo = self.makeShortInfoItem(item: item)
+        self.infoItems = self.makeDetailInfoItems(item: item)
     }
     
-    private func makeDetailInfoItmes(item: AppStoreItem) -> [AppDetailInfoItem] {
+    private func makeDetailInfoItems(item: AppStoreItem) -> [AppDetailInfoItem] {
         let lastIndex = item.languageCodesISO2A.count - 1
         let name = self.languageTypes.first?.name ?? ""
-        //item.languageTypes.first?.name ?? ""
         var languageTitle = "\(name) 외 \(lastIndex)개"
         if lastIndex == .zero {
             languageTitle = name
@@ -85,7 +84,7 @@ public struct StoreDomainEntity: Hashable {
         ]
     }
     
-    private func makeShortInfoItmes(item: AppStoreItem) -> [AppShortVarietyInfoItem] {
+    private func makeShortInfoItem(item: AppStoreItem) -> [AppShortVarietyInfoItem] {
             let lastIndex = item.languageCodesISO2A.count - 1
             var language = "+ \(lastIndex)개 언어"
 

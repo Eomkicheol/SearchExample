@@ -8,8 +8,6 @@
 import Foundation
 
 import RxSwift
-import Moya
-
 
 public enum ApiError: Error {
     case noResponse

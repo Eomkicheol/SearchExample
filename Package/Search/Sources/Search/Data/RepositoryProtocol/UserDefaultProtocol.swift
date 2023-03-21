@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol UserdefaultImpl: AnyObject {
+public protocol UserDefaultProtocol: AnyObject {
     func setString(_ key: String, value: [String])
     func getString(_ key: String) -> [String]
 }

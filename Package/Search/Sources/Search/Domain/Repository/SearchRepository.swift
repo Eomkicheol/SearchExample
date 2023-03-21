@@ -5,24 +5,21 @@
 //  Created by 엄기철 on 2023/03/20.
 //
 
-
-
 import Networking
 import RxSwift
 import Entitys
 import Apis
 import DomainEntity
 
-
-public struct SearchRepository: SearchRepositoryImpl  {
+public struct SearchRepository: SearchRepositoryProtocol  {
     
     private let network: NetworkType
     private let dataMapper: StoreDataMapper
-    private let userDefault: UserdefaultImpl
+    private let userDefault: UserDefaultProtocol
     
     public init(network: NetworkType,
                 dataMapper: StoreDataMapper,
-                userDefault: UserdefaultImpl) {
+                userDefault: UserDefaultProtocol) {
         self.network = network
         self.dataMapper = dataMapper
         self.userDefault = userDefault

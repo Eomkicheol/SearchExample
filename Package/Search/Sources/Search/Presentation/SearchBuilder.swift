@@ -14,10 +14,10 @@ import DetailRequirement
 
 public class SearchDependency: Dependency {
     
-    let repositroy: SearchRepositoryImpl
+    let repositroy: SearchRepositoryProtocol
     let detailBuilder: DetailBuildable
     
-    public init(repositroy: SearchRepositoryImpl, detailBuilder: DetailBuildable) {
+    public init(repositroy: SearchRepositoryProtocol, detailBuilder: DetailBuildable) {
         self.repositroy = repositroy
         self.detailBuilder = detailBuilder
     }

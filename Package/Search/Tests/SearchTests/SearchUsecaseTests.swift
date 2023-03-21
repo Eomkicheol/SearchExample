@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SearchUsecaseTests.swift
 //  
 //
 //  Created by 엄기철 on 2023/03/21.
@@ -35,22 +35,23 @@ final class SearchUsecaseTests: XCTestCase {
     
     func test_saveUserDefaultTest() {
         // when
-        self.sut.setUserDefaultKeyword(with: "111", value: ["222"])
+        self.sut.setUserDefaultKeyword(with: "searchKeyword", value: ["kakao"])
         
         // then
         XCTAssertEqual(self.userDefault.setStringCallCount, 1)
-        XCTAssertEqual(self.userDefault.setStringParams?.key, "111")
-        XCTAssertEqual(self.userDefault.setStringParams?.value, ["222"])
+        XCTAssertEqual(self.userDefault.setStringParams?.key, "searchKeyword")
+        XCTAssertEqual(self.userDefault.setStringParams?.value, ["kakao"])
     }
     
     func test_getUserDefaultTest() {
         // when
-        let result = self.sut.fetchUserDefaultKeyword(with: "11")
+        let result = self.sut.fetchUserDefaultKeyword(with: "searchKeyword")
         
         
         // then
         XCTAssertEqual(self.userDefault.getStringCellCount, 1)
         XCTAssertEqual(self.userDefault.deumygetString, ["kakao"])
+        XCTAssertEqual(self.userDefault.getString("searchKeyword"), result)
     }
 }
 
@@ -62,7 +63,7 @@ extension SearchUsecaseTests {
         }
     }
     
-    final class SpyUserdefaultImpl: UserdefaultImpl {
+    final class SpyUserdefaultImpl: UserDefaultProtocol {
         
         func getString(_ key: String) -> [String] {
             self.getStringCellCount += 1
@@ -70,7 +71,7 @@ extension SearchUsecaseTests {
         }
         
         var getStringCellCount: Int = 0
-        var deumygetString: [String] = ["kakaao"]
+        var deumygetString: [String] = ["kakao"]
         
         var setStringCallCount: Int = 0
         var setStringParams: (key: String, value: [String])?

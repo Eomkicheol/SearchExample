@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  UserdefaultManager.swift
 //  
 //
 //  Created by 엄기철 on 2023/03/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class UserdefaultManager: UserdefaultImpl {
+public class UserdefaultManager: UserDefaultProtocol {
     
     public init() {}
     

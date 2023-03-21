@@ -40,9 +40,5 @@ let package = Package(
                     .product(name: "ModuleComponents", package: "Platform"),
                     .product(name: "DomainEntity", package: "Networking"),
                 ]),
-        
-            .testTarget(
-                name: "DetailTests",
-                dependencies: ["Detail"]),
     ]
 )

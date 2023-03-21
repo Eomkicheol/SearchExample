@@ -68,11 +68,11 @@ extension SceneDelegate {
                       detailBuilder: detailBuilder)
     }
     
-    private func makerRepository() -> SearchRepositoryImpl {
+    private func makerRepository() -> SearchRepositoryProtocol {
         let network: NetworkType = Network()
         let datmMapper = StoreDataMapper()
-        let userDefault: UserdefaultImpl = UserdefaultManager()
-        let repository: SearchRepositoryImpl = SearchRepository(network: network,
+        let userDefault: UserDefaultProtocol = UserdefaultManager()
+        let repository: SearchRepositoryProtocol = SearchRepository(network: network,
                                                                 dataMapper: datmMapper,
                                                                 userDefault: userDefault)
         

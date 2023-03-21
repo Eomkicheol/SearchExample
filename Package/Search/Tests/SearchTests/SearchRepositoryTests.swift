@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SearchRepositoryTests.swift
 //  
 //
 //  Created by 엄기철 on 2023/03/21.
@@ -71,14 +71,12 @@ extension SearchRepositoryTests {
         }
     }
     
-    final class StubUserDefault: UserdefaultImpl {
+    final class StubUserDefault: UserDefaultProtocol {
         func getString(_ key: String) -> [String] {
             return []
         }
         
-        func setString(_ key: String, value: [String]) {
-            
-        }
+        func setString(_ key: String, value: [String]) {}
     }
 }
 
