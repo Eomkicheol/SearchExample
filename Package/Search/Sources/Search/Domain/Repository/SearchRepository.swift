@@ -30,9 +30,10 @@ public struct SearchRepository: SearchRepositoryImpl  {
     
     public func fetchSearchKeyword(with keyword: String, limit: Int) -> Observable<[StoreDomainEntity]> {
         return self.network.request(SearchApi.search(keyword: keyword, limit: limit))
+            .map {  item -> [StoreDomainEntity] in
+                return self.dataMapper.toDataModel(domainModel: item)
+            }
             .asObservable()
-            .flatMap {  item -> Observable<[StoreDomainEntity]> in
-                return Observable.just(self.dataMapper.toDataModel(domainModel: item)) }
     }
     
     public func toDataModel(domainModel: StoreEntity) -> [StoreDomainEntity] {
