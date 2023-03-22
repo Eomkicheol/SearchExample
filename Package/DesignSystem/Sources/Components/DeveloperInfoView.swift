@@ -20,19 +20,25 @@ public class DeveloperInfoView: UIView {
     }
     
     let titleLabel = UILabel().then {
-        $0.text = "이름"
-        $0.textColor = .link
+        $0.text = "개발자"
+        $0.textColor = .systemGray2
+        
         $0.font = UIFont.systemFont(ofSize: 13)
         $0.numberOfLines = 1
     }
     
     let sellerNameLabel = UILabel().then {
-        $0.textColor = .systemGray2
+        $0.textColor = .link
         $0.font = UIFont.systemFont(ofSize: 13)
         $0.numberOfLines = 1
     }
     
-    let moreButton = UIButton(type: .custom)
+    let moreButton = UIButton(type: .custom).then {
+        $0.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        $0.tintColor = .systemGray2
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+    }
     
     
     @available(*, unavailable)
@@ -56,7 +62,7 @@ public class DeveloperInfoView: UIView {
             self.addSubview($0)
         }
         
-        [titleLabel, sellerNameLabel].forEach {
+        [sellerNameLabel, titleLabel].forEach {
             stackView.addArrangedSubview($0)
         }
         

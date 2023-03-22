@@ -46,6 +46,7 @@ public class DetailInfoView: UIView {
     var moreImageView = UIImageView().then {
         $0.image = UIImage(systemName: "chevron.down")
         $0.contentMode = .scaleAspectFit
+        $0.tintColor = .systemGray2
         $0.clipsToBounds = true
     }
     

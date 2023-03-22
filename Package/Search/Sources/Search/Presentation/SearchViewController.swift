@@ -34,6 +34,8 @@ final class SearchViewController: UIViewController, SearchControllerable, Reacto
     
     typealias Reactor = SearchReactor
     
+    typealias UiState = Reactor.State
+    
     // MARK: - Initializer
     
     // MARK: - Lifecycle
@@ -135,6 +137,8 @@ extension SearchViewController {
     }
     
     private func bindTableViewSection(reactor: Reactor) {
+        
+        
         reactor.pulse(\.$searchSection)
             .compactMap { $0 }
             .asDriver(onErrorJustReturn: [])
