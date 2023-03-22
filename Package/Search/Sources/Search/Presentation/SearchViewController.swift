@@ -138,9 +138,9 @@ extension SearchViewController {
     
     private func bindTableViewSection(reactor: Reactor) {
         
-        
-        reactor.pulse(\.$searchSection)
-            .compactMap { $0 }
+        reactor.state
+            .map {$0.searchSection}
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: [])
             .drive(with: self, onNext: {vc, section in
                 vc.content.updateUI(sections: section)

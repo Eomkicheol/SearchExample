@@ -23,7 +23,6 @@ final class SearchReactor: Reactor {
     
     private enum Constants {
         static let itemCount: Int = 50
-        static let searchKey: String = "searchKey"
     }
     
     
@@ -53,12 +52,10 @@ final class SearchReactor: Reactor {
     
     struct State {
         @Pulse var type: SearchState?
-        @Pulse var isHistoryAll: [String]?
-        @Pulse var isSearchList: [StoreDomainEntity]?
         @Pulse var isErrorMessage: String?
-        @Pulse var searchSection: [SearchSection]?
-        @Pulse var removeSearchKeyword: String?
+        var searchSection: [SearchSection] = []
         @Pulse var selectedItem: StoreDomainEntity?
+        @Pulse var removeSearchKeyword: String?
         var totalCount: Int = 0
     }
     
@@ -66,6 +63,7 @@ final class SearchReactor: Reactor {
         case setType(SearchState)
         case setHistoryAll(previousList: [String])
         case setHistoryFilter(filterList: [String])
+        case restorePreviousSearch(searchList: [String])
         case setHistoryRemoveAll(String?)
         case setSearchKeyword([StoreDomainEntity])
         case setErrorMessage(String)
@@ -114,6 +112,9 @@ final class SearchReactor: Reactor {
             
         case let .setSelectedItem(value):
             newState = self.searchSelectedItemReduce(state: newState, item: value)
+            
+        case let .restorePreviousSearch(value):
+            newState = self.restorePreviousSearchReduce(state: newState, searchList: value)
         }
         return newState
     }
@@ -122,7 +123,7 @@ final class SearchReactor: Reactor {
 // MARK: Mutation
 extension SearchReactor {
     private func setHistoryKeywordAllMutation() -> Observable<Mutation> {
-        self.previousList = self.useCase.fetchUserDefaultKeyword(with: Constants.searchKey)
+        self.previousList = self.useCase.fetchSearchKeywords()
         
         return Observable.concat([
             Observable.just(Mutation.setType(.historyAll)),
@@ -131,12 +132,12 @@ extension SearchReactor {
     }
     
     private func setSearchKeywordMutation(keyword: String) -> Observable<Mutation> {
-        self.previousList = self.useCase.fetchUserDefaultKeyword(with: Constants.searchKey)
+        self.previousList = self.useCase.fetchSearchKeywords()
         if let index = previousList.firstIndex(where: { $0 == keyword }) {
             previousList.remove(at: index)
         }
         previousList.append(keyword)
-        self.useCase.setUserDefaultKeyword(with: Constants.searchKey, value: previousList)
+        self.useCase.saveSearchKeywords(value: previousList)
         
         let search = self.useCase.fetchSearchKeyword(with: keyword, limit: Constants.itemCount)
             .flatMap { Observable.just(Mutation.setSearchKeyword($0) )}
@@ -151,9 +152,8 @@ extension SearchReactor {
     }
     
     private func setHistoryKeywordFilterMutation(keyword: String) ->  Observable<Mutation> {
-        self.previousList = self.useCase.fetchUserDefaultKeyword(with: Constants.searchKey)
-        
-        
+        self.previousList = self.useCase.fetchSearchKeywords()
+    
         let filterList = self.previousList.filter { $0.localizedStandardContains(keyword)}
         
         return Observable.concat([
@@ -163,12 +163,13 @@ extension SearchReactor {
     }
     
     private func searchKeywordRemoveAllMutation() -> Observable<Mutation> {
-        self.previousList = self.useCase.fetchUserDefaultKeyword(with: Constants.searchKey)
+        self.previousList = self.useCase.fetchSearchKeywords()
         
         return Observable.concat([
             Observable.just(Mutation.setType(.removeAll)),
             Observable.just(Mutation.setHistoryRemoveAll("")),
-            Observable.just(Mutation.setHistoryRemoveAll(nil))
+            Observable.just(Mutation.setHistoryRemoveAll(nil)),
+            Observable.just(Mutation.restorePreviousSearch(searchList: self.previousList))
         ])
     }
     
@@ -205,7 +206,7 @@ extension SearchReactor {
     private func searchResultReduce(state: State, items: [StoreDomainEntity]) -> State {
         var newState = state
         newState.totalCount = items.count
-        newState.isSearchList = items
+        
         
         if items.count > 0 {
             let sectionItems = items.map { SearchSection.Item.result(SearchResultCellReactor(items: $0) )}
@@ -234,14 +235,7 @@ extension SearchReactor {
         var newState = state
         newState.removeSearchKeyword = keyword
         
-        let sectionItems = self.previousList.map { SearchSection.Item.keyword(
-            SearchKeywordCellReactor(items: $0)
-        )}
-        
-        newState.searchSection = [
-            SearchSection(identity: .keyword, items: sectionItems)
-        ]
-        return newState
+      return newState
     }
     
     private func errorMessageReduce(state: State, message: String) -> State {
@@ -260,6 +254,19 @@ extension SearchReactor {
     private func searchSelectedItemReduce(state: State, item: StoreDomainEntity) -> State {
         var newState = state
         newState.selectedItem = item
+        return newState
+    }
+    
+    private func restorePreviousSearchReduce(state: State, searchList: [String]) -> State {
+        var newState = state
+        
+        let sectionItems = searchList.map { SearchSection.Item.keyword(
+            SearchKeywordCellReactor(items: $0)
+        )}
+        
+        newState.searchSection = [
+            SearchSection(identity: .keyword, items: sectionItems)
+        ]
         return newState
     }
 }

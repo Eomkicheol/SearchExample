@@ -35,23 +35,22 @@ final class SearchUsecaseTests: XCTestCase {
     
     func test_saveUserDefaultTest() {
         // when
-        self.sut.setUserDefaultKeyword(with: "searchKeyword", value: ["kakao"])
+        self.sut.saveSearchKeywords(value: ["kakao"])
         
         // then
         XCTAssertEqual(self.userDefault.setStringCallCount, 1)
-        XCTAssertEqual(self.userDefault.setStringParams?.key, "searchKeyword")
         XCTAssertEqual(self.userDefault.setStringParams?.value, ["kakao"])
     }
     
     func test_getUserDefaultTest() {
         // when
-        let result = self.sut.fetchUserDefaultKeyword(with: "searchKeyword")
+        let result = self.sut.fetchSearchKeywords()
         
         
         // then
         XCTAssertEqual(self.userDefault.getStringCellCount, 1)
         XCTAssertEqual(self.userDefault.deumygetString, ["kakao"])
-        XCTAssertEqual(self.userDefault.getString("searchKeyword"), result)
+        XCTAssertEqual(self.userDefault.getString("Search"), result)
     }
 }
 

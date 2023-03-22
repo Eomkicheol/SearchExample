@@ -13,6 +13,10 @@ import DomainEntity
 
 public struct SearchRepository: SearchRepositoryProtocol  {
     
+    public var searchKey: String {
+        return "Search"
+    }
+    
     private let network: NetworkType
     private let dataMapper: StoreDataMapper
     private let userDefault: UserDefaultProtocol
@@ -37,11 +41,12 @@ public struct SearchRepository: SearchRepositoryProtocol  {
         return self.dataMapper.toDataModel(domainModel: domainModel)
     }
     
-    public func fetchUserDefaultKeyword(with key: String) -> [String] {
-        return self.userDefault.getString(key)
+    
+    public func fetchSearchKeywords() -> [String] {
+        self.userDefault.getString(self.searchKey)
     }
     
-    public func setUserDefaultKeyword(with key: String, value: [String]) {
-        self.userDefault.setString(key, value: value)
+    public func saveSearchKeywords(value: [String]) {
+        self.userDefault.setString(self.searchKey, value: value)
     }
 }

@@ -12,6 +12,7 @@ import DomainEntity
 
 public protocol SearchRepositoryProtocol {
     func fetchSearchKeyword(with keyword: String, limit: Int) -> Observable<[StoreDomainEntity]>
-    func fetchUserDefaultKeyword(with key: String) -> [String]
-    func setUserDefaultKeyword(with key: String, value: [String])
+    func fetchSearchKeywords() -> [String]
+    func saveSearchKeywords(value: [String])
+    var searchKey: String { get }
 }

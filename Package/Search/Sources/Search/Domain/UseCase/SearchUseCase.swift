@@ -22,11 +22,12 @@ public class SearchUseCase {
         return repository.fetchSearchKeyword(with: keyword, limit: limit)
     }
     
-    public func fetchUserDefaultKeyword(with key: String) -> [String] {
-        return repository.fetchUserDefaultKeyword(with: key)
+    public func fetchSearchKeywords() -> [String] {
+        return repository.fetchSearchKeywords()
+
     }
     
-    public func setUserDefaultKeyword(with key: String, value: [String]) {
-        repository.setUserDefaultKeyword(with: key, value: value)
+    public func saveSearchKeywords(value: [String]) {
+        repository.saveSearchKeywords(value: value)
     }
 }
