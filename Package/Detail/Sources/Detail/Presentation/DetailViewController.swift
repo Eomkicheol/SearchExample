@@ -29,7 +29,9 @@ public enum DetatilStackViewType {
 public class DetailViewController: UIViewController, DetailControllerable, ReactorKit.View {
     
     // MARK: - View
-    var content = ListView()
+    lazy var content = ListView().then {
+        $0.delegate = self
+    }
     
     // MARK: - Property
     var router: DetailRoutable?
@@ -232,8 +234,8 @@ extension DetailViewController {
     }
 }
 
-extension DetailViewController: AppInfoViewDelegate {
-    public func didTapSharedButton() {
+extension DetailViewController: ListViewDelegate {
+    public func sharedButtonTapped() {
         guard let trackName = self.reactor?.currentState.itesm.trackName else { return }
         let items = [trackName]
         let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)

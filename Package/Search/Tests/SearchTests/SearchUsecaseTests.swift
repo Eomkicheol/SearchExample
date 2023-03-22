@@ -14,13 +14,13 @@ import Networking
 final class SearchUsecaseTests: XCTestCase {
 
     var repository: SearchRepository!
-    var userDefault: SpyUserdefaultImpl!
+    var userDefault: StubUserDefault!
     var sut: SearchUseCase!
     
     override func setUpWithError() throws {
         self.userDefault = .init()
         self.repository = .init(
-            network: DummyNetwork(),
+            network: StubNetwork(),
             dataMapper: StoreDataMapper(),
             userDefault: self.userDefault
         )
@@ -49,28 +49,28 @@ final class SearchUsecaseTests: XCTestCase {
         
         // then
         XCTAssertEqual(self.userDefault.getStringCellCount, 1)
-        XCTAssertEqual(self.userDefault.deumygetString, ["kakao"])
+        XCTAssertEqual(self.userDefault.dummyGetString, ["kakao"])
         XCTAssertEqual(self.userDefault.getString("Search"), result)
     }
 }
 
 extension SearchUsecaseTests {
     
-    final class DummyNetwork: NetworkType {
+    final class StubNetwork: NetworkType {
         func request<T>(_ target: TargetType) -> Single<T> where T : Decodable, T : Encodable {
             return .just("" as! T)
         }
     }
     
-    final class SpyUserdefaultImpl: UserDefaultProtocol {
+    final class StubUserDefault: UserDefaultProtocol {
         
         func getString(_ key: String) -> [String] {
             self.getStringCellCount += 1
-            return self.deumygetString
+            return self.dummyGetString
         }
         
         var getStringCellCount: Int = 0
-        var deumygetString: [String] = ["kakao"]
+        var dummyGetString: [String] = ["kakao"]
         
         var setStringCallCount: Int = 0
         var setStringParams: (key: String, value: [String])?

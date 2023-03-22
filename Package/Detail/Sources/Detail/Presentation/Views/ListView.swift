@@ -24,6 +24,10 @@ extension Reactive where Base: ListView {
     }
 }
 
+public protocol ListViewDelegate: AnyObject {
+    func sharedButtonTapped()
+}
+
 public class ListView: UIView {
     
     // MARK: - View
@@ -49,6 +53,8 @@ public class ListView: UIView {
     }
     
     public var disposeBag = DisposeBag()
+    
+    weak var delegate: ListViewDelegate?
     
     
     // MARK: - Initializer
@@ -178,7 +184,7 @@ extension ListView {
 
 extension ListView: AppInfoViewDelegate {
     public func didTapSharedButton() {
-        
+        self.delegate?.sharedButtonTapped()
     }
 }
 
