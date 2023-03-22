@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Launch",
-    platforms: [.iOS(.v15)],
+    platforms: [.iOS(.v13)],
     products: [
         .library(
             name: "LaunchRequirement",
