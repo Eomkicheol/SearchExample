@@ -75,6 +75,7 @@ public class DetailViewController: UIViewController, DetailControllerable, React
         self.bindDescriptionView(reactor: reactor)
         self.bindNavigationStatus(reactor: reactor)
         self.bindDetailInfosView(reactor: reactor)
+        
     }
 }
 

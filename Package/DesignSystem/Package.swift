@@ -7,9 +7,9 @@ let package = Package(
     name: "DesignSystem",
     platforms: [.iOS(.v15)],
     products: [
-        
         .library(
             name: "Components",
+            type: .static,
             targets: ["Components"]),
     ],
     dependencies: [

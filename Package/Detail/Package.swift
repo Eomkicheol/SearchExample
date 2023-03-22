@@ -9,10 +9,11 @@ let package = Package(
     products: [
         .library(
             name: "Detail",
+            type: .static,
             targets: ["Detail"]),
-        
             .library(
                 name: "DetailRequirement",
+                type: .dynamic,
                 targets: ["DetailRequirement"]),
     ],
     dependencies: [

@@ -10,18 +10,22 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "Networking",
+            type: .static,
             targets: ["Networking"]),
         
             .library(
                 name: "Apis",
+                type: .static,
                 targets: ["Apis"]),
         
             .library(
                 name: "Entitys",
+                type: .static,
                 targets: ["Entitys"]),
         
             .library(
                 name: "DomainEntity",
+                type: .dynamic,
                 targets: ["DomainEntity"]),
     ],
     dependencies: [

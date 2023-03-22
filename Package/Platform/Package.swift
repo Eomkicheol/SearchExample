@@ -9,22 +9,27 @@ let package = Package(
     products: [
         .library(
             name: "ModuleComponents",
+            type: .dynamic,
             targets: ["ModuleComponents"]),
         
             .library(
                 name: "ReusableKit",
+                type: .static,
                 targets: ["ReusableKit"]),
         
             .library(
                 name: "Utils",
+                type: .static,
                 targets: ["Utils"]),
         
             .library(
                 name: "Common",
+                type: .dynamic,
                 targets: ["Common"]),
         
             .library(
                 name: "ImageLoader",
+                type: .static,
                 targets: ["ImageLoader"]),
     ],
     dependencies: [
