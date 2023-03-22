@@ -19,7 +19,6 @@ let package = Package(
         .package(path: "../Platform"),
         .package(path: "../Detail"),
         .package(path: "../Search"),
-        .package(path: "../Networking"),
         .package(path: "../Launch"),
         .package(path: "../Root"),
     ],

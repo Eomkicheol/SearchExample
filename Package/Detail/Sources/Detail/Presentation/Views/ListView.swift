@@ -22,7 +22,7 @@ extension Reactive where Base: ListView {
     }
 }
 
-public class ListView: UIView, UIScrollViewDelegate {
+public class ListView: UIView {
     
     // MARK: - View
     let scrollView = UIScrollView().then {

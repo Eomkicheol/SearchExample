@@ -10,10 +10,7 @@ import UIKit
 
 import ModuleComponents
 import RootRequirement
-
 import AppRequirement
-
-
 
 final class App: AppControllable {
     var uiviewController: UIViewController

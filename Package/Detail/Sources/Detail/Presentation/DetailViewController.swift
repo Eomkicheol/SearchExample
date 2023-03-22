@@ -248,12 +248,6 @@ extension DetailViewController {
     }
 }
 
-//extension DetailViewController: ListViewDelegate {
-//    public func contentOffset(with offset: CGFloat) {
-////
-//    }
-//}
-
 extension DetailViewController: AppInfoViewDelegate {
     public func didTapSharedButton() {
         guard let trackName = self.reactor?.currentState.itesm.trackName else { return }

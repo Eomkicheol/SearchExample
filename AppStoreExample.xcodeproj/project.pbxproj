@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F32102129C9994F00CD0885 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 5F32102029C9994F00CD0885 /* App */; };
+		5F2F9B5A29CAC2BB004489AC /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 5F2F9B5929CAC2BB004489AC /* App */; };
 		5F49E93829C59857009B12FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F49E93729C59857009B12FA /* AppDelegate.swift */; };
 		5F49E93A29C59857009B12FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F49E93929C59857009B12FA /* SceneDelegate.swift */; };
 		5F49E94129C59858009B12FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F49E94029C59858009B12FA /* Assets.xcassets */; };
 		5F49E94429C59858009B12FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F49E94229C59858009B12FA /* LaunchScreen.storyboard */; };
+		5FF5A2BA29CAC3AB00F9A5FE /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 5FF5A2B929CAC3AB00F9A5FE /* Networking */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +38,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F32102129C9994F00CD0885 /* App in Frameworks */,
+				5FF5A2BA29CAC3AB00F9A5FE /* Networking in Frameworks */,
+				5F2F9B5A29CAC2BB004489AC /* App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +132,8 @@
 			);
 			name = AppStoreExample;
 			packageProductDependencies = (
-				5F32102029C9994F00CD0885 /* App */,
+				5F2F9B5929CAC2BB004489AC /* App */,
+				5FF5A2B929CAC3AB00F9A5FE /* Networking */,
 			);
 			productName = AppStoreExample;
 			productReference = 5F49E93429C59857009B12FA /* AppStoreExample.app */;
@@ -401,9 +404,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5F32102029C9994F00CD0885 /* App */ = {
+		5F2F9B5929CAC2BB004489AC /* App */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = App;
+		};
+		5FF5A2B929CAC3AB00F9A5FE /* Networking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Networking;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
