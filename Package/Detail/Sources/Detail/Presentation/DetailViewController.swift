@@ -22,9 +22,7 @@ import DomainEntity
 public class DetailViewController: UIViewController, DetailControllerable, ReactorKit.View {
     
     // MARK: - View
-    lazy var content = ListView().then {
-        $0.delegate = self
-    }
+    var content = ListView()
     
     // MARK: - Property
     var router: DetailRoutable?
@@ -75,7 +73,7 @@ public class DetailViewController: UIViewController, DetailControllerable, React
         self.bindDescriptionView(reactor: reactor)
         self.bindNavigationStatus(reactor: reactor)
         self.bindDetailInfosView(reactor: reactor)
-        
+        self.bindScrollViewDidScroll(reactor: reactor)
     }
 }
 
@@ -213,6 +211,13 @@ extension DetailViewController {
             }
             .disposed(by: self.disposeBag)
     }
+    
+    private func bindScrollViewDidScroll(reactor: Reactor) {
+        self.content.rx.didScroll
+            .map { Reactor.Action.scrollViewOffset($0)}
+            .bind(to: reactor.action)
+            .disposed(by: self.content.disposeBag)
+    }
 }
 
 extension DetailViewController {
@@ -243,11 +248,11 @@ extension DetailViewController {
     }
 }
 
-extension DetailViewController: ListViewDelegate {
-    public func contentOffset(with offset: CGFloat) {
-        self.reactor?.action.onNext(Reactor.Action.scrollViewOffset(offset))
-    }
-}
+//extension DetailViewController: ListViewDelegate {
+//    public func contentOffset(with offset: CGFloat) {
+////
+//    }
+//}
 
 extension DetailViewController: AppInfoViewDelegate {
     public func didTapSharedButton() {

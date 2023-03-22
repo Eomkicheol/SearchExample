@@ -9,12 +9,10 @@ let package = Package(
     products: [
         .library(
             name: "LaunchRequirement",
-            type: .dynamic,
             targets: ["LaunchRequirement"]),
         
             .library(
                 name: "Launch",
-                type: .static,
                 targets: ["Launch"]),
     ],
     dependencies: [

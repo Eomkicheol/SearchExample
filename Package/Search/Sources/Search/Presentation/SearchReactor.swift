@@ -60,7 +60,6 @@ final class SearchReactor: Reactor {
         @Pulse var removeSearchKeyword: String?
         @Pulse var selectedItem: StoreDomainEntity?
         var totalCount: Int = 0
-        
     }
     
     enum Mutation {

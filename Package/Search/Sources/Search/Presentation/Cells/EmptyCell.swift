@@ -17,9 +17,7 @@ public class EmptyCell: UICollectionViewCell, View {
     
     public typealias Reactor = EmptyCellReactor
     
-
     public var disposeBag = DisposeBag()
-    
     
     let emptyTitle = UILabel().then {
         $0.textColor = .black
@@ -50,7 +48,6 @@ public class EmptyCell: UICollectionViewCell, View {
             $0.center.equalToSuperview()
         }
     }
-    
     
     public func bind(reactor: EmptyCellReactor) {
         reactor.state

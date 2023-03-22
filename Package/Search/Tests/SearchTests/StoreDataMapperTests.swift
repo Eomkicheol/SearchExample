@@ -7,11 +7,7 @@
 
 import XCTest
 
-import RxSwift
-
-import Networking
 import Entitys
-import DomainEntity
 
 @testable import Search
 

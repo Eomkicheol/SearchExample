@@ -9,11 +9,9 @@ let package = Package(
     products: [
         .library(
             name: "Root",
-            type: .static,
             targets: ["Root"]),
         .library(
             name: "RootRequirement",
-            type: .dynamic,
             targets: ["RootRequirement"]),
     ],
     dependencies: [
@@ -21,7 +19,6 @@ let package = Package(
         .package(path: "../Launch"),
         .package(path: "../Search"),
         .package(path: "../Detail"),
-        .package(path: "../Networking")
     ],
     targets: [
         

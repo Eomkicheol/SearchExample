@@ -8,7 +8,6 @@
 import Foundation
 import DetailRequirement
 import ModuleComponents
-import DomainEntity
 
 public class DetailDependency {
     

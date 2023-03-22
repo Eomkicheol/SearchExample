@@ -14,9 +14,12 @@ import RxSwift
 import ReusableKit
 import RxDataSources
 
-
-public protocol ListViewDelegate: NSObject {
-    func contentOffset(with offset: CGFloat)
+extension Reactive where Base: ListView {
+    var didScroll: ControlEvent<CGFloat> {
+        let source = self.base.scrollView.rx.didScroll
+            .map { _ in self.base.scrollView.contentOffset.y }
+            return ControlEvent(events: source)
+    }
 }
 
 public class ListView: UIView, UIScrollViewDelegate {
@@ -45,7 +48,6 @@ public class ListView: UIView, UIScrollViewDelegate {
     
     public var disposeBag = DisposeBag()
     
-    weak var delegate: ListViewDelegate?
     
     // MARK: - Initializer
     
@@ -94,18 +96,7 @@ public class ListView: UIView, UIScrollViewDelegate {
         self.backgroundColor = .white
     }
     
-    private func setUpAction() {
-        scrollView.rx.didScroll
-            .map { [weak self] _ -> CGFloat in
-                guard let self = self else { return 0.0 }
-                return self.scrollView.contentOffset.y
-            }
-            .asDriver(onErrorJustReturn: 0.0)
-            .drive(with: self) { vc, offset in
-                vc.delegate?.contentOffset(with: offset)
-            }
-            .disposed(by: self.disposeBag)
-    }
+    private func setUpAction() {}
     
     
 }

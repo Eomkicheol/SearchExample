@@ -39,7 +39,6 @@ public class ListView: UIView, UIScrollViewDelegate {
         $0.register(Reusable.keywordCell)
         $0.register(Reusable.emptyCell)
         $0.register(Reusable.searchResultCell)
-        
     }
     
     
@@ -92,10 +91,8 @@ public class ListView: UIView, UIScrollViewDelegate {
             $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
-            
         }
     }
-    
     
     private func setUpState() {
         self.backgroundColor = .white

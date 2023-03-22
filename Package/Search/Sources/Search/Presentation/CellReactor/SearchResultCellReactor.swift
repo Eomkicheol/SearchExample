@@ -35,7 +35,6 @@ public class SearchResultCellReactor: Reactor, IdentityHashable {
     }
     
     
-    
     init(items: StoreDomainEntity) {
         defer { _ = self.state }
         self.initialState = State(items: items)

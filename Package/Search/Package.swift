@@ -10,12 +10,10 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "Search",
-            type: .static,
             targets: ["Search"]),
         
             .library(
                 name: "SearchRequirement",
-                type: .dynamic,
                 targets: ["SearchRequirement"]),
     ],
     dependencies: [

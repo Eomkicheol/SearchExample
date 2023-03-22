@@ -9,11 +9,9 @@ let package = Package(
     products: [
         .library(
             name: "Detail",
-            type: .static,
             targets: ["Detail"]),
             .library(
                 name: "DetailRequirement",
-                type: .dynamic,
                 targets: ["DetailRequirement"]),
     ],
     dependencies: [
@@ -32,7 +30,7 @@ let package = Package(
                 .product(name: "ThirdPartys", package: "ThirdPartys"),
                 .product(name: "Utils", package: "Platform"),
                 .product(name: "Components", package: "DesignSystem"),
-                .product(name: "DomainEntity", package: "Platform"),
+                .product(name: "DomainEntity", package: "Networking"),
             ]),
         
             .target(
