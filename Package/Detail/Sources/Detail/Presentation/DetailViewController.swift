@@ -26,7 +26,7 @@ public enum DetatilStackViewType {
 }
 
 
-public class DetailViewController: UIViewController, DetailControllerable, ReactorKit.View {
+final class DetailViewController: UIViewController, DetailControllerable, ReactorKit.View {
     
     // MARK: - View
     lazy var content = ListView().then {

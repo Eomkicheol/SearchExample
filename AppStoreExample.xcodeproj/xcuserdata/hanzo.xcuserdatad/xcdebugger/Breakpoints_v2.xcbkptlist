@@ -50,6 +50,38 @@
             endingLineNumber = "121"
             landmarkName = "didTapSharedButton(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7C5DD5C2-AE22-4B44-B9D5-B0CFF4F678AE - 54a11f4e3a0ff807"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Components.AppInfoView.didTapSharedButton(__C.UIButton) -&gt; ()"
+                  moduleName = "AppStoreExample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hanzo/Desktop/%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A6%20%E1%84%8C%E1%85%A6%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%8B%E1%85%AD%E1%86%BC/AppStoreExample/Package/DesignSystem/Sources/Components/AppInfoView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "7C5DD5C2-AE22-4B44-B9D5-B0CFF4F678AE - 205fd4ca2787fc7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Components.AppInfoView.didTapSharedButton(__C.UIButton) -&gt; ()"
+                  moduleName = "SearchTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hanzo/Desktop/%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A6%20%E1%84%8C%E1%85%A6%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%8B%E1%85%AD%E1%86%BC/AppStoreExample/Package/DesignSystem/Sources/Components/AppInfoView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

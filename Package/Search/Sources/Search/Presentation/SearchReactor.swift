@@ -10,6 +10,7 @@ import RxSwift
 import Utils
 
 import DomainEntity
+import Networking
 
 
 public enum SearchState {
@@ -30,13 +31,19 @@ final class SearchReactor: Reactor {
     
     var previousList: [String] = []
     
+    
+    // var keywordStore...
+    
+    // keywordStore.toSections()
+    
     let useCase: SearchUseCase
     
+    let maker: SearchSectionMaker
     
-    init(useCase: SearchUseCase) {
+    init(useCase: SearchUseCase, maker: SearchSectionMaker) {
         self.useCase = useCase
+        self.maker = maker
     }
-    
     
     deinit {
         print(self)
@@ -123,8 +130,6 @@ final class SearchReactor: Reactor {
 // MARK: Mutation
 extension SearchReactor {
     private func setHistoryKeywordAllMutation() -> Observable<Mutation> {
-        self.previousList = self.useCase.fetchSearchKeywords()
-        
         return Observable.concat([
             Observable.just(Mutation.setType(.historyAll)),
             Observable.just(Mutation.setHistoryAll(previousList: self.previousList.reversed()))
@@ -132,17 +137,13 @@ extension SearchReactor {
     }
     
     private func setSearchKeywordMutation(keyword: String) -> Observable<Mutation> {
-        self.previousList = self.useCase.fetchSearchKeywords()
-        if let index = previousList.firstIndex(where: { $0 == keyword }) {
-            previousList.remove(at: index)
-        }
-        previousList.append(keyword)
-        self.useCase.saveSearchKeywords(value: previousList)
+        self.previousList = self.useCase.updateSearchKeyword(keyword: keyword, previousList: self.previousList)
         
         let search = self.useCase.fetchSearchKeyword(with: keyword, limit: Constants.itemCount)
             .flatMap { Observable.just(Mutation.setSearchKeyword($0) )}
             .catch { error -> Observable<Mutation> in
-                return Observable.just(Mutation.setErrorMessage(error.localizedDescription))
+                guard let error = error as? ApiError else { return .empty() }
+                return Observable.just(Mutation.setErrorMessage(error.description))
             }
         
         return Observable.concat([
@@ -184,6 +185,7 @@ extension SearchReactor {
         var newState = state
         
         switch self.currentState.type {
+            
         case .historyAll, .historyFilter:
             
             let sectionItems = previousList.map { SearchSection.Item.keyword(
@@ -260,9 +262,7 @@ extension SearchReactor {
     private func restorePreviousSearchReduce(state: State, searchList: [String]) -> State {
         var newState = state
         
-        let sectionItems = searchList.map { SearchSection.Item.keyword(
-            SearchKeywordCellReactor(items: $0)
-        )}
+        let sectionItems = maker.makeSectionItems(keywords: searchList)
         
         newState.searchSection = [
             SearchSection(identity: .keyword, items: sectionItems)
@@ -270,3 +270,29 @@ extension SearchReactor {
         return newState
     }
 }
+
+
+// sections tech
+
+
+// UseCase -> error messsage ? (base ? server error. data empty... -> .... algori -> errorMessage....
+
+// Repository -> ....
+
+// Repository -> StoreDomainEntity List
+
+// 5 store -> 3
+// 3 store -> 1
+// ........... (... ...
+// finda > .... >>. ... ....
+
+
+
+
+// documents, design
+// Domain -> ... ? (design)
+// - properties....
+
+// documents (algori)
+// -> Domain -> ... -> Domain(3) ..
+// (external data -> ... algori(document) -> domain) -> screen data

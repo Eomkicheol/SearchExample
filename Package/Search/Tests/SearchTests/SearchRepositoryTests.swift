@@ -27,7 +27,7 @@ final class SearchRepositoryTests: XCTestCase {
         self.sut = .init(
             network: self.network,
             dataMapper: StoreDataMapper(),
-            userDefault: StubUserDefault()
+            userDefault: DummyUserDefault()
         )
     }
     
@@ -71,7 +71,7 @@ extension SearchRepositoryTests {
         }
     }
     
-    final class StubUserDefault: UserDefaultProtocol {
+    final class DummyUserDefault: UserDefaultProtocol {
         func getString(_ key: String) -> [String] {
             return []
         }

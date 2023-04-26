@@ -39,6 +39,7 @@ public class ListView: UIView, UIScrollViewDelegate {
         $0.register(Reusable.keywordCell)
         $0.register(Reusable.emptyCell)
         $0.register(Reusable.searchResultCell)
+        
     }
     
     
@@ -64,6 +65,7 @@ public class ListView: UIView, UIScrollViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
+        
     }
     
     required init?(coder: NSCoder) {

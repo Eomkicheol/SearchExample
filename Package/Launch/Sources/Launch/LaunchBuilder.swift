@@ -16,8 +16,6 @@ public struct LaunchDependency: Dependency {
 }
 
 
-
-
 public final class LaunchBuilder: Builder<LaunchDependency> , LaunchBuildable {
     public func build(with parameter: LaunchParameter) -> Controllable {
         
@@ -25,8 +23,10 @@ public final class LaunchBuilder: Builder<LaunchDependency> , LaunchBuildable {
         
         let router: LaunchRoutable = LaunchRouter()
         
+        
         //DI
         viewController.router = router
+
         
         return viewController
     }

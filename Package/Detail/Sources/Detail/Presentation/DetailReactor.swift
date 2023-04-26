@@ -13,7 +13,7 @@ import RxSwift
 import DomainEntity
 
 
-public class DetailReactor: Reactor {
+final class DetailReactor: Reactor {
     
     private enum Constants {}
     

@@ -30,7 +30,7 @@ public final class SearchBuilder: Builder<SearchDependency>, SearchBuildable {
         let useCase: SearchUseCase = SearchUseCase(repository: dependency.repositroy)
         
         let router: SearchRoutable = SearchRouter(builder: dependency.detailBuilder)
-        let reactor: SearchReactor = SearchReactor(useCase: useCase)
+        let reactor: SearchReactor = SearchReactor(useCase: useCase, maker: .init())
         
         viewController.router = router
         viewController.reactor = reactor

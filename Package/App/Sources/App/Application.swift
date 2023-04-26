@@ -42,7 +42,7 @@ final class App: AppControllable {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        guard let  root = router.routeToRoot() as? RootControllerable else {
+        guard let root = router.routeToRoot() as? RootControllerable else {
             return
         }
         

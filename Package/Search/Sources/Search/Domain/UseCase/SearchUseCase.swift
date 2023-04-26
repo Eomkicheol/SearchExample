@@ -24,10 +24,26 @@ public class SearchUseCase {
     
     public func fetchSearchKeywords() -> [String] {
         return repository.fetchSearchKeywords()
-
     }
     
     public func saveSearchKeywords(value: [String]) {
         repository.saveSearchKeywords(value: value)
+    }
+    
+    public func saveHistoryKeywordAll() -> [String] {
+        let previousList: [String] = self.fetchSearchKeywords()
+        return previousList.reversed()
+    }
+    
+    
+    public func updateSearchKeyword(keyword: String, previousList: [String]) -> [String] {
+        var result = previousList
+        
+        if let index = result.firstIndex(where: { $0 == keyword}) {
+            result.remove(at: index)
+        }
+        result.append(keyword)
+        self.saveSearchKeywords(value: result)
+        return result
     }
 }

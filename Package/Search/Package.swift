@@ -46,6 +46,10 @@ let package = Package(
                 ]),
         .testTarget(
             name: "SearchTests",
-            dependencies: ["Search"]),
+            dependencies: [
+                "Search",
+                .product(name: "Detail", package: "Detail"),
+                .product(name: "DetailRequirement", package: "Detail"),
+            ]),
     ]
 )

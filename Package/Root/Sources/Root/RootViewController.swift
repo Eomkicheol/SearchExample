@@ -43,7 +43,7 @@ final class RootViewController: UINavigationController, RootControllerable {
     }
     
     private func setUpState() {
-        presentLaunch(animated: false)
+        presentLaunch(animated: true)
     }
     
     private func setUpAction() {
